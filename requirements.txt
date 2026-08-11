@@ -1,0 +1,4 @@
+# Everything this repository needs. Deliberately short: an architecture demo
+# that only runs on a cluster is a claim nobody can check.
+duckdb>=1.0.0
+pytest>=7.4.0
