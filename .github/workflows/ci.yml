@@ -1,0 +1,32 @@
+# The point of this file is that the conformance linter has a vote.
+#
+# A standards document that cannot fail a build is a document people stop
+# reading. Here, non-conformance at ERROR severity exits 1 and the job goes
+# red — the same way a failing test does, because it is the same kind of
+# failure.
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+
+      - name: Build the warehouse
+        run: python run_demo.py --reset --no-analysis
+
+      - name: Check it against the written standards
+        run: python -m conformance.check --db warehouse.duckdb
+
+      - name: Tests
+        run: pytest -q
