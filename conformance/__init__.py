@@ -1,0 +1,1 @@
+"""The written standards, executed."""
