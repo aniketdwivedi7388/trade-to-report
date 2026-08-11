@@ -1,0 +1,11 @@
+*.duckdb
+*.duckdb.wal
+extracts/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+.idea/
+.vscode/
